@@ -1,17 +1,33 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
   <!-- Background -->
-  <rect width="32" height="32" rx="8" fill="#0f0f0f"/>
-  <!-- 3D cube isometric -->
-  <!-- Top face -->
-  <polygon points="16,4 27,10 16,16 5,10" fill="#e8e8e8"/>
-  <!-- Left face -->
-  <polygon points="5,10 16,16 16,28 5,22" fill="#888888"/>
-  <!-- Right face -->
-  <polygon points="27,10 16,16 16,28 27,22" fill="#b0b0b0"/>
-  <!-- Edge lines -->
-  <polyline points="16,4 27,10 27,22 16,28 5,22 5,10 16,4" stroke="#333" stroke-width="0.5" fill="none"/>
-  <line x1="16" y1="16" x2="16" y2="28" stroke="#333" stroke-width="0.5"/>
-  <line x1="16" y1="4" x2="16" y2="16" stroke="#333" stroke-width="0.5"/>
-  <line x1="5" y1="10" x2="16" y2="16" stroke="#333" stroke-width="0.5"/>
-  <line x1="27" y1="10" x2="16" y2="16" stroke="#333" stroke-width="0.5"/>
+  <rect width="32" height="32" rx="7" fill="#111"/>
+
+  <!-- Body -->
+  <path d="M3 20 L3 16 L7 16 L10 11 L20 10 L25 13 L29 14 L29 20 Z" fill="#c87820"/>
+
+  <!-- Roof / cabin -->
+  <path d="M10 16 L11 11.5 L19.5 10.5 L23 13 L23 16 Z" fill="#1a1a1a" opacity="0.6"/>
+
+  <!-- Body shadow line -->
+  <path d="M3 18.5 L29 18.5" stroke="#9a5c10" stroke-width="0.6"/>
+
+  <!-- Front detail -->
+  <rect x="27" y="15.5" width="2" height="2" rx="0.4" fill="#cc3333"/>
+
+  <!-- Headlight -->
+  <rect x="27.5" y="14.2" width="1.2" height="1" rx="0.3" fill="#ffe080"/>
+
+  <!-- Wheel wells -->
+  <circle cx="9" cy="20" r="3.2" fill="#111"/>
+  <circle cx="22" cy="20" r="3.2" fill="#111"/>
+
+  <!-- Tyres -->
+  <circle cx="9" cy="20" r="3" fill="#222"/>
+  <circle cx="22" cy="20" r="3" fill="#222"/>
+
+  <!-- Rims -->
+  <circle cx="9" cy="20" r="1.6" fill="#555"/>
+  <circle cx="9" cy="20" r="0.7" fill="#888"/>
+  <circle cx="22" cy="20" r="1.6" fill="#555"/>
+  <circle cx="22" cy="20" r="0.7" fill="#888"/>
 </svg>
