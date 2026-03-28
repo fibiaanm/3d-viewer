@@ -1,0 +1,50 @@
+{
+  "base": {
+    "id": "base",
+    "label": "Base",
+    "color": "#ffffff",
+    "roughness": 0.8,
+    "metalness": 0.0,
+    "textureUrl": "/products/wooden_cabin/textures/base-1.jpeg"
+  },
+  "wood1": {
+    "id": "wood1",
+    "label": "Wood 1",
+    "color": "#ffffff",
+    "roughness": 0.8,
+    "metalness": 0.0,
+    "textureUrl": "/products/wooden_cabin/textures/wood-1.png"
+  },
+  "wood2": {
+    "id": "wood2",
+    "label": "Wood 2",
+    "color": "#ffffff",
+    "roughness": 0.8,
+    "metalness": 0.0,
+    "textureUrl": "/products/wooden_cabin/textures/wood-2.png"
+  },
+  "wood3": {
+    "id": "wood3",
+    "label": "Wood 3",
+    "color": "#ffffff",
+    "roughness": 0.8,
+    "metalness": 0.0,
+    "textureUrl": "/products/wooden_cabin/textures/wood-3.png"
+  },
+  "wood4": {
+    "id": "wood4",
+    "label": "Wood 4",
+    "color": "#ffffff",
+    "roughness": 0.8,
+    "metalness": 0.0,
+    "textureUrl": "/products/wooden_cabin/textures/wood-4.png"
+  },
+  "wood5": {
+    "id": "wood5",
+    "label": "Wood 5",
+    "color": "#ffffff",
+    "roughness": 0.8,
+    "metalness": 0.0,
+    "textureUrl": "/products/wooden_cabin/textures/wood-5.png"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "wooden_cabin",
+  "title": "Wooden Cabin Door",
+  "description": "A rustic cabin door with a single operable left panel and solid frame construction.",
+  "longDescription": "Built for durability and character, this cabin door features a classic hinged left panel with a robust cylindrical frame. The natural wood finish highlights the grain and texture of the material, bringing warmth to any entrance.",
+  "category": "Doors",
+  "tags": ["exterior", "wood", "rustic"],
+  "price": 980,
+  "currency": "USD",
+  "previewImage": "/products/wooden_cabin/preview.png",
+  "dimensions": { "width": 110, "height": 220, "depth": 8, "unit": "cm" },
+  "weight": "24 kg",
+  "materials": ["Solid Pine", "Steel Hardware"],
+  "gallery": [],
+  "modelUrl": "/products/wooden_cabin/model.glb",
+  "contractPath": "/products/wooden_cabin/contract.json"
+}

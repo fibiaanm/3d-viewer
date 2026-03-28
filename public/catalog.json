@@ -11,14 +11,14 @@
     "detailPath": "/products/generic_door/product.json"
   },
   {
-    "id": "armchair_01",
-    "title": "Lounge Armchair",
-    "description": "Ergonomic lounge chair with adjustable armrests and premium upholstery options.",
-    "category": "Seating",
-    "tags": ["living room", "fabric", "ergonomic"],
-    "price": 890,
+    "id": "wooden_cabin",
+    "title": "Wooden Cabin Door",
+    "description": "A rustic cabin door with a single operable left panel and solid frame construction.",
+    "category": "Doors",
+    "tags": ["exterior", "wood", "rustic"],
+    "price": 980,
     "currency": "USD",
-    "previewImage": "/products/armchair_01/preview.jpg",
-    "detailPath": "/products/armchair_01/product.json"
+    "previewImage": "/products/wooden_cabin/preview.png",
+    "detailPath": "/products/wooden_cabin/product.json"
   }
 ]

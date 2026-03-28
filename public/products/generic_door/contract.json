@@ -4,6 +4,9 @@
     "sheetUrl": "/products/generic_door/materials.json",
     "default": "base"
   },
+  "lighting": {
+    "type": "normal"
+  },
   "parts": {
     "door": {
       "nodeName": "Door",

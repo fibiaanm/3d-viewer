@@ -2,7 +2,7 @@ import { onUnmounted } from 'vue'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
-import type { Contract, MaterialDefinition } from '@/types/contract'
+import type { Contract, MaterialDefinition, LightingConfig } from '@/types/contract'
 import { assetUrl } from '@/utils/assetUrl'
 
 export function useThreeScene() {
@@ -13,6 +13,9 @@ export function useThreeScene() {
   let animFrameId: number | null = null
   let resizeObserver: ResizeObserver | null = null
   let mixer: THREE.AnimationMixer | null = null
+  let ambientLight: THREE.AmbientLight | null = null
+  let keyLight: THREE.DirectionalLight | null = null
+  let fillLight: THREE.DirectionalLight | null = null
   const clock = new THREE.Clock()
   const animationClips = new Map<string, THREE.AnimationClip>()
   const meshMap: Record<string, THREE.Object3D> = {}
@@ -35,24 +38,24 @@ export function useThreeScene() {
     camera = new THREE.PerspectiveCamera(45, canvasEl.clientWidth / canvasEl.clientHeight, 0.1, 100)
     camera.position.set(2.5, 1.8, 3.5)
 
-    const ambient = new THREE.AmbientLight(0xffffff, 0.4)
-    scene.add(ambient)
+    ambientLight = new THREE.AmbientLight(0xffffff, 0.4)
+    scene.add(ambientLight)
 
-    const key = new THREE.DirectionalLight(0xffffff, 1.5)
-    key.position.set(3, 6, 4)
-    key.castShadow = true
-    key.shadow.mapSize.set(2048, 2048)
-    key.shadow.camera.near = 0.1
-    key.shadow.camera.far = 20
-    key.shadow.camera.left = -5
-    key.shadow.camera.right = 5
-    key.shadow.camera.top = 5
-    key.shadow.camera.bottom = -5
-    scene.add(key)
+    keyLight = new THREE.DirectionalLight(0xffffff, 1.5)
+    keyLight.position.set(3, 6, 4)
+    keyLight.castShadow = true
+    keyLight.shadow.mapSize.set(2048, 2048)
+    keyLight.shadow.camera.near = 0.1
+    keyLight.shadow.camera.far = 20
+    keyLight.shadow.camera.left = -5
+    keyLight.shadow.camera.right = 5
+    keyLight.shadow.camera.top = 5
+    keyLight.shadow.camera.bottom = -5
+    scene.add(keyLight)
 
-    const fill = new THREE.DirectionalLight(0xffeedd, 0.4)
-    fill.position.set(-3, 2, -2)
-    scene.add(fill)
+    fillLight = new THREE.DirectionalLight(0xffeedd, 0.4)
+    fillLight.position.set(-3, 2, -2)
+    scene.add(fillLight)
 
     const grid = new THREE.GridHelper(8, 16, 0x222222, 0x1a1a1a)
     scene.add(grid)
@@ -130,6 +133,8 @@ export function useThreeScene() {
       const distance = (maxDim / 2 / Math.tan(fov / 2)) * 1.8
       camera.position.set(distance * 0.6, distance * 0.5, distance * 0.8)
       controls.target.set(0, size.y / 4, 0)
+      controls.minDistance = maxDim * 0.3
+      controls.maxDistance = distance * 3
       controls.update()
     }
 
@@ -289,6 +294,31 @@ export function useThreeScene() {
     }
   }
 
+  function applyLighting(config?: LightingConfig) {
+    if (!ambientLight || !keyLight || !fillLight) return
+    if (!config || config.type === 'normal') {
+      ambientLight.color.set(0xffffff)
+      ambientLight.intensity = 0.4
+      keyLight.color.set(0xffffff)
+      keyLight.intensity = 1.5
+      fillLight.color.set(0xffeedd)
+      fillLight.intensity = 0.4
+      return
+    }
+    if (config.ambient) {
+      ambientLight.color.set(config.ambient.color)
+      ambientLight.intensity = config.ambient.intensity
+    }
+    if (config.key) {
+      keyLight.color.set(config.key.color)
+      keyLight.intensity = config.key.intensity
+    }
+    if (config.fill) {
+      fillLight.color.set(config.fill.color)
+      fillLight.intensity = config.fill.intensity
+    }
+  }
+
   function dispose() {
     if (animFrameId !== null) cancelAnimationFrame(animFrameId)
     resizeObserver?.disconnect()
@@ -299,5 +329,5 @@ export function useThreeScene() {
 
   onUnmounted(dispose)
 
-  return { init, loadModel, buildPlaceholderModel, playAnimation, applyRotation, applyMaterial }
+  return { init, loadModel, buildPlaceholderModel, playAnimation, applyRotation, applyMaterial, applyLighting }
 }

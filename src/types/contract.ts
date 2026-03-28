@@ -38,12 +38,25 @@ export interface ContractPart {
   actions?: PartAction[]
 }
 
+export interface LightConfig {
+  color: string
+  intensity: number
+}
+
+export interface LightingConfig {
+  type: 'normal' | 'custom'
+  ambient?: LightConfig
+  key?: LightConfig
+  fill?: LightConfig
+}
+
 export interface Contract {
   product: string
   material: {
     sheetUrl: string
     default: string
   }
+  lighting?: LightingConfig
   parts: Record<string, ContractPart>
 }
 

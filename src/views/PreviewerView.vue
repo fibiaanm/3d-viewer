@@ -107,7 +107,7 @@ const store = useProductStore()
 const { product, contract, materialSheet, loading, error } = storeToRefs(store)
 
 const canvasComponent = ref<InstanceType<typeof ModelCanvas> | null>(null)
-const { init, loadModel, buildPlaceholderModel, playAnimation, applyRotation, applyMaterial } = useThreeScene()
+const { init, loadModel, buildPlaceholderModel, playAnimation, applyRotation, applyMaterial, applyLighting } = useThreeScene()
 const { partStates, activeMaterial, onPartChange, setPartRotation, triggerAction, setMaterial } =
   useContractInteraction(contract)
 
@@ -177,6 +177,8 @@ watch(
       init(canvas)
 
       if (!contract.value) return
+
+      applyLighting(contract.value.lighting)
 
       if (product.value?.modelUrl) {
         await loadModel(assetUrl(product.value.modelUrl))

@@ -1,0 +1,54 @@
+{
+  "product": "wooden_cabin",
+  "material": {
+    "sheetUrl": "/products/wooden_cabin/materials.json",
+    "default": "base"
+  },
+  "lighting": {
+    "type": "custom",
+    "ambient": { "color": "#ffffff", "intensity": 0.6 },
+    "key": { "color": "#ffffff", "intensity": 2.5 },
+    "fill": { "color": "#ffcc44", "intensity": 0.9 }
+  },
+  "parts": {
+    "leftDoor": {
+      "nodeName": "LeftDoor",
+      "label": "Left Door",
+      "type": "hinge",
+      "transform": {
+        "rotation": {
+          "axis": "y",
+          "min": -90,
+          "max": 0,
+          "unit": "degrees",
+          "default": 0
+        }
+      },
+      "capabilities": {
+        "rotate": true,
+        "translate": false,
+        "scale": false
+      }
+    },
+    "rightDoor": {
+      "nodeName": "RightDoor",
+      "label": "Right Door",
+      "type": "static",
+      "capabilities": {
+        "rotate": false,
+        "translate": false,
+        "scale": false
+      }
+    },
+    "frame": {
+      "nodeName": "Cylinder.001_1",
+      "label": "Frame",
+      "type": "static",
+      "capabilities": {
+        "rotate": false,
+        "translate": false,
+        "scale": false
+      }
+    }
+  }
+}
