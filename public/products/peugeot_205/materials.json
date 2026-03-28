@@ -1,0 +1,10 @@
+{
+  "base": {
+    "id": "base",
+    "label": "Base",
+    "color": "#ffffff",
+    "roughness": 0.5,
+    "metalness": 0.3,
+    "textureUrl": "/products/peugeot_205/textures/base.png"
+  }
+}

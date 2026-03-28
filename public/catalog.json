@@ -20,5 +20,16 @@
     "currency": "USD",
     "previewImage": "/products/wooden_cabin/preview.png",
     "detailPath": "/products/wooden_cabin/product.json"
+  },
+  {
+    "id": "peugeot_205",
+    "title": "Peugeot 205",
+    "description": "Iconic French hatchback from the 1980s, a design and engineering classic.",
+    "category": "Cars",
+    "tags": ["classic", "french", "hatchback"],
+    "price": 0,
+    "currency": "USD",
+    "previewImage": "/products/peugeot_205/preview.png",
+    "detailPath": "/products/peugeot_205/product.json"
   }
 ]

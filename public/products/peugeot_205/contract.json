@@ -1,0 +1,57 @@
+{
+  "product": "peugeot_205",
+  "material": {
+    "sheetUrl": "/products/peugeot_205/materials.json",
+    "default": "base"
+  },
+  "lighting": {
+    "type": "custom",
+    "ambient": { "color": "#fff5e0", "intensity": 0.5 },
+    "key": { "color": "#ffe4a0", "intensity": 2.0 },
+    "fill": { "color": "#ffaa00", "intensity": 0.7 }
+  },
+  "parts": {
+    "body": {
+      "nodeName": "205",
+      "label": "Body",
+      "type": "static",
+      "capabilities": { "rotate": false, "translate": false, "scale": false }
+    },
+    "hood": {
+      "nodeName": "Capot",
+      "label": "Hood",
+      "type": "static",
+      "capabilities": { "rotate": false, "translate": false, "scale": false }
+    },
+    "frontLeftDoor": {
+      "nodeName": "Portes avant gauche",
+      "label": "Front Left Door",
+      "type": "static",
+      "capabilities": { "rotate": false, "translate": false, "scale": false }
+    },
+    "frontRightDoor": {
+      "nodeName": "Portes avant droite",
+      "label": "Front Right Door",
+      "type": "static",
+      "capabilities": { "rotate": false, "translate": false, "scale": false }
+    },
+    "rearLeftDoor": {
+      "nodeName": "Portes arrière gauche",
+      "label": "Rear Left Door",
+      "type": "static",
+      "capabilities": { "rotate": false, "translate": false, "scale": false }
+    },
+    "rearRightDoor": {
+      "nodeName": "Portes arrière droite",
+      "label": "Rear Right Door",
+      "type": "static",
+      "capabilities": { "rotate": false, "translate": false, "scale": false }
+    },
+    "windshield": {
+      "nodeName": "Pare brise",
+      "label": "Windshield",
+      "type": "static",
+      "capabilities": { "rotate": false, "translate": false, "scale": false }
+    }
+  }
+}
