@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type { Product } from '@/types/product'
 import type { Contract, MaterialSheet } from '@/types/contract'
+import { assetUrl } from '@/utils/assetUrl'
 
 export const useProductStore = defineStore('product', () => {
   const product = ref<Product | null>(null)
@@ -17,14 +18,14 @@ export const useProductStore = defineStore('product', () => {
     contract.value = null
     materialSheet.value = null
     try {
-      const productRes = await fetch(`/products/${id}/product.json`)
+      const productRes = await fetch(assetUrl(`/products/${id}/product.json`))
       if (!productRes.ok) throw new Error(`Product not found: ${id}`)
       product.value = await productRes.json()
 
-      const contractRes = await fetch(product.value!.contractPath)
+      const contractRes = await fetch(assetUrl(product.value!.contractPath))
       contract.value = await contractRes.json()
 
-      const matRes = await fetch(contract.value!.material.sheetUrl)
+      const matRes = await fetch(assetUrl(contract.value!.material.sheetUrl))
       materialSheet.value = await matRes.json()
     } catch (e) {
       error.value = (e as Error).message

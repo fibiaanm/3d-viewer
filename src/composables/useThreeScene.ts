@@ -3,6 +3,7 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import type { Contract, MaterialDefinition } from '@/types/contract'
+import { assetUrl } from '@/utils/assetUrl'
 
 export function useThreeScene() {
   let renderer: THREE.WebGLRenderer | null = null
@@ -226,80 +227,8 @@ export function useThreeScene() {
     obj.rotation[axis] = (valueDeg * Math.PI) / 180
   }
 
-  function createTriplanarMaterial(texture: THREE.Texture, matDef: MaterialDefinition): THREE.MeshStandardMaterial {
-    const scale = matDef.triplanar?.scale ?? 1.0
-
-    const mat = new THREE.MeshStandardMaterial({
-      color: new THREE.Color(matDef.color),
-      roughness: matDef.roughness,
-      metalness: matDef.metalness,
-    })
-
-    mat.onBeforeCompile = (shader) => {
-      shader.uniforms.uTriplanarTexture = { value: texture }
-      shader.uniforms.uTriplanarScale = { value: scale }
-
-      // Inject varying declaration at top of both shaders
-      shader.vertexShader = 'varying vec3 vWorldPos;\n' + shader.vertexShader
-      shader.fragmentShader = 'varying vec3 vWorldPos;\n' + shader.fragmentShader
-
-      // Compute world position in vertex shader
-      shader.vertexShader = shader.vertexShader.replace(
-        '#include <begin_vertex>',
-        '#include <begin_vertex>\nvWorldPos = (modelMatrix * vec4(position, 1.0)).xyz;',
-      )
-
-      // Inject triplanar uniforms at top of fragment shader
-      shader.fragmentShader =
-        'uniform sampler2D uTriplanarTexture;\nuniform float uTriplanarScale;\n' +
-        shader.fragmentShader
-
-      // Inject triplanar sampling after base color
-      shader.fragmentShader = shader.fragmentShader.replace(
-        '#include <color_fragment>',
-        `
-        #include <color_fragment>
-        {
-          vec3 triNorm = abs(vNormal);
-          triNorm = pow(triNorm, vec3(8.0));
-          triNorm /= triNorm.x + triNorm.y + triNorm.z;
-
-          vec4 cx = texture2D(uTriplanarTexture, vWorldPos.yz * uTriplanarScale);
-          vec4 cy = texture2D(uTriplanarTexture, vWorldPos.xz * uTriplanarScale);
-          vec4 cz = texture2D(uTriplanarTexture, vWorldPos.xy * uTriplanarScale);
-
-          diffuseColor *= (cx * triNorm.x + cy * triNorm.y + cz * triNorm.z);
-        }
-        `,
-      )
-    }
-
-    // Mark for recompile when uniforms change
-    mat.customProgramCacheKey = () => `triplanar-${matDef.id}`
-
-    return mat
-  }
-
   function applyMaterial(matDef: MaterialDefinition) {
-    if (matDef.mapping === 'triplanar' && matDef.textureUrl) {
-      textureLoader.load(matDef.textureUrl, (texture) => {
-        texture.colorSpace = THREE.SRGBColorSpace
-        texture.wrapS = THREE.RepeatWrapping
-        texture.wrapT = THREE.RepeatWrapping
-        const triplanarMat = createTriplanarMaterial(texture, matDef)
-        for (const obj of Object.values(meshMap)) {
-          obj.traverse((child) => {
-            if ((child as THREE.Mesh).isMesh) {
-              ;(child as THREE.Mesh).material = triplanarMat
-            }
-          })
-        }
-      })
-      return
-    }
-
-    // UV mapping — restore original GLTF material then apply texture
-    const applyUV = (texture: THREE.Texture | null) => {
+    const apply = (texture: THREE.Texture | null) => {
       for (const obj of Object.values(meshMap)) {
         obj.traverse((child) => {
           if ((child as THREE.Mesh).isMesh) {
@@ -311,6 +240,7 @@ export function useThreeScene() {
             for (const m of materials as THREE.MeshStandardMaterial[]) {
               if (texture) {
                 texture.colorSpace = THREE.SRGBColorSpace
+                texture.flipY = false
                 m.map = texture
               }
               m.color.set(matDef.color)
@@ -324,9 +254,9 @@ export function useThreeScene() {
     }
 
     if (matDef.textureUrl) {
-      textureLoader.load(matDef.textureUrl, applyUV)
+      textureLoader.load(assetUrl(matDef.textureUrl), apply)
     } else {
-      applyUV(null)
+      apply(null)
     }
   }
 

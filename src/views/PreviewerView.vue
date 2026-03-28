@@ -100,6 +100,7 @@ import MaterialSwatches from '@/components/previewer/MaterialSwatches.vue'
 import PartPanel from '@/components/previewer/PartPanel.vue'
 import AppDivider from '@/components/ui/AppDivider.vue'
 import AppSpinner from '@/components/ui/AppSpinner.vue'
+import { assetUrl } from '@/utils/assetUrl'
 
 const route = useRoute()
 const store = useProductStore()
@@ -178,7 +179,7 @@ watch(
       if (!contract.value) return
 
       if (product.value?.modelUrl) {
-        await loadModel(product.value.modelUrl)
+        await loadModel(assetUrl(product.value.modelUrl))
       } else {
         buildPlaceholderModel(contract.value)
       }

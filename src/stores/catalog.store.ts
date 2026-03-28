@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { CatalogItem } from '@/types/catalog'
+import { assetUrl } from '@/utils/assetUrl'
 
 export const useCatalogStore = defineStore('catalog', () => {
   const items = ref<CatalogItem[]>([])
@@ -19,7 +20,7 @@ export const useCatalogStore = defineStore('catalog', () => {
     loading.value = true
     error.value = null
     try {
-      const res = await fetch('/catalog.json')
+      const res = await fetch(assetUrl('/catalog.json'))
       items.value = await res.json()
     } catch (e) {
       error.value = (e as Error).message
