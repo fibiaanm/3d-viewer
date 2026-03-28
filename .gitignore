@@ -20,6 +20,7 @@ dist-ssr/
 # Editor
 .vscode/
 .idea/
+.cursor/
 *.suo
 *.ntvs*
 *.njsproj
