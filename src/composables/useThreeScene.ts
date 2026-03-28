@@ -16,6 +16,7 @@ export function useThreeScene() {
   const clock = new THREE.Clock()
   const animationClips = new Map<string, THREE.AnimationClip>()
   const meshMap: Record<string, THREE.Object3D> = {}
+  const baseQuaternions = new Map<string, THREE.Quaternion>()
   const originalMaterials = new Map<string, THREE.Material | THREE.Material[]>()
   const textureLoader = new THREE.TextureLoader()
 
@@ -93,9 +94,12 @@ export function useThreeScene() {
     const loader = new GLTFLoader()
     const gltf = await loader.loadAsync(url)
 
-    // Register all named nodes in meshMap and store original materials
+    // Register all named nodes in meshMap, store base quaternions and original materials
     gltf.scene.traverse((child) => {
-      if (child.name) meshMap[child.name] = child
+      if (child.name) {
+        meshMap[child.name] = child
+        baseQuaternions.set(child.name, child.quaternion.clone())
+      }
       if ((child as THREE.Mesh).isMesh) {
         const mesh = child as THREE.Mesh
         mesh.castShadow = true
@@ -110,7 +114,24 @@ export function useThreeScene() {
       gltf.animations.forEach((clip) => animationClips.set(clip.name, clip))
     }
 
+    // Center model and fit camera
+    const box = new THREE.Box3().setFromObject(gltf.scene)
+    const center = box.getCenter(new THREE.Vector3())
+    const size = box.getSize(new THREE.Vector3())
+    gltf.scene.position.sub(center)
+    gltf.scene.position.y += size.y / 2
+
     scene.add(gltf.scene)
+
+    // Fit camera to model
+    if (camera && controls) {
+      const maxDim = Math.max(size.x, size.y, size.z)
+      const fov = (camera.fov * Math.PI) / 180
+      const distance = (maxDim / 2 / Math.tan(fov / 2)) * 1.8
+      camera.position.set(distance * 0.6, distance * 0.5, distance * 0.8)
+      controls.target.set(0, size.y / 4, 0)
+      controls.update()
+    }
 
     // Shadow floor
     const floor = new THREE.Mesh(
@@ -218,13 +239,21 @@ export function useThreeScene() {
       scene?.remove(meshMap[key])
       delete meshMap[key]
     }
+    baseQuaternions.clear()
     originalMaterials.clear()
   }
 
   function applyRotation(nodeName: string, axis: 'x' | 'y' | 'z', valueDeg: number) {
     const obj = meshMap[nodeName]
     if (!obj) return
-    obj.rotation[axis] = (valueDeg * Math.PI) / 180
+    const base = baseQuaternions.get(nodeName) ?? new THREE.Quaternion()
+    const axisVec = new THREE.Vector3(
+      axis === 'x' ? 1 : 0,
+      axis === 'y' ? 1 : 0,
+      axis === 'z' ? 1 : 0,
+    )
+    const delta = new THREE.Quaternion().setFromAxisAngle(axisVec, (valueDeg * Math.PI) / 180)
+    obj.quaternion.multiplyQuaternions(base, delta)
   }
 
   function applyMaterial(matDef: MaterialDefinition) {

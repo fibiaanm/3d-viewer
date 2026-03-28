@@ -54,10 +54,6 @@ export interface MaterialDefinition {
   roughness: number
   metalness: number
   textureUrl?: string
-  mapping?: 'uv' | 'triplanar'
-  triplanar?: {
-    scale: number
-  }
 }
 
 export type MaterialSheet = Record<string, MaterialDefinition>
