@@ -1,0 +1,61 @@
+{
+  "base": {
+    "id": "base",
+    "label": "Base",
+    "color": "#ffffff",
+    "roughness": 0.8,
+    "metalness": 0.0,
+    "textureUrl": "/products/generic_door/textures/base-texture.jpeg",
+    "mapping": "uv"
+  },
+  "wood_1": {
+    "id": "wood_1",
+    "label": "Oak Natural",
+    "color": "#ffffff",
+    "roughness": 0.8,
+    "metalness": 0.0,
+    "textureUrl": "/products/generic_door/textures/wood-1.png",
+    "mapping": "triplanar",
+    "triplanar": { "scale": 1.5 }
+  },
+  "wood_2": {
+    "id": "wood_2",
+    "label": "Oak Warm",
+    "color": "#ffffff",
+    "roughness": 0.75,
+    "metalness": 0.0,
+    "textureUrl": "/products/generic_door/textures/wood-2.png",
+    "mapping": "triplanar",
+    "triplanar": { "scale": 1.5 }
+  },
+  "wood_3": {
+    "id": "wood_3",
+    "label": "Walnut",
+    "color": "#ffffff",
+    "roughness": 0.7,
+    "metalness": 0.0,
+    "textureUrl": "/products/generic_door/textures/wood-3.png",
+    "mapping": "triplanar",
+    "triplanar": { "scale": 1.5 }
+  },
+  "wood_4": {
+    "id": "wood_4",
+    "label": "Dark Oak",
+    "color": "#ffffff",
+    "roughness": 0.8,
+    "metalness": 0.0,
+    "textureUrl": "/products/generic_door/textures/wood-4.png",
+    "mapping": "triplanar",
+    "triplanar": { "scale": 1.5 }
+  },
+  "wood_5": {
+    "id": "wood_5",
+    "label": "Ebony",
+    "color": "#ffffff",
+    "roughness": 0.65,
+    "metalness": 0.05,
+    "textureUrl": "/products/generic_door/textures/wood-5.png",
+    "mapping": "triplanar",
+    "triplanar": { "scale": 1.5 }
+  }
+}

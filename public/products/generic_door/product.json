@@ -1,0 +1,17 @@
+{
+  "id": "generic_door",
+  "title": "Minimalist Door",
+  "description": "A clean, contemporary door with smooth hinge mechanics and customizable finish.",
+  "longDescription": "Crafted for modern interiors, this door combines clean geometry with precise engineering. The hinge mechanism operates with whisper-quiet movement, and the surface is available in three carefully curated natural finishes.",
+  "category": "Doors",
+  "tags": ["interior", "wood", "minimalist"],
+  "price": 1200,
+  "currency": "USD",
+  "previewImage": "/products/generic_door/preview.jpg",
+  "dimensions": { "width": 90, "height": 210, "depth": 5, "unit": "cm" },
+  "weight": "18 kg",
+  "materials": ["Solid Oak", "Steel Hinges"],
+  "gallery": [],
+  "modelUrl": "/products/generic_door/model.glb",
+  "contractPath": "/products/generic_door/contract.json"
+}

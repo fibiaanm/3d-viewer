@@ -1,0 +1,59 @@
+{
+  "product": "generic_door",
+  "material": {
+    "sheetUrl": "/products/generic_door/materials.json",
+    "default": "base"
+  },
+  "parts": {
+    "door": {
+      "nodeName": "Door",
+      "label": "Door Panel",
+      "type": "hinge",
+      "capabilities": {
+        "rotate": false,
+        "translate": false,
+        "scale": false
+      },
+      "actions": [
+        {
+          "id": "open_right",
+          "label": "Open →",
+          "type": "animation",
+          "animationName": "3_open_right",
+          "durationMs": 1000
+        },
+        {
+          "id": "close_right",
+          "label": "Close →",
+          "type": "animation",
+          "animationName": "3_close_right",
+          "durationMs": 1000
+        },
+        {
+          "id": "open_left",
+          "label": "Open ←",
+          "type": "animation",
+          "animationName": "4_open_left",
+          "durationMs": 1000
+        },
+        {
+          "id": "close_left",
+          "label": "Close ←",
+          "type": "animation",
+          "animationName": "4_close_left",
+          "durationMs": 1000
+        }
+      ]
+    },
+    "frame": {
+      "nodeName": "Frame",
+      "label": "Frame",
+      "type": "static",
+      "capabilities": {
+        "rotate": false,
+        "translate": false,
+        "scale": false
+      }
+    }
+  }
+}

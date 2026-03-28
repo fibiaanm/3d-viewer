@@ -1,0 +1,62 @@
+{
+  "product": "armchair_01",
+  "material": {
+    "sheetUrl": "/products/armchair_01/materials.json",
+    "default": "fabric_natural"
+  },
+  "parts": {
+    "seat": {
+      "nodeName": "Seat",
+      "label": "Seat & Back",
+      "type": "static",
+      "capabilities": {
+        "rotate": false,
+        "translate": false,
+        "scale": false
+      }
+    },
+    "armrests": {
+      "nodeName": "Armrests",
+      "label": "Armrests",
+      "type": "hinge",
+      "transform": {
+        "rotation": {
+          "axis": "x",
+          "min": 0,
+          "max": 30,
+          "unit": "degrees",
+          "default": 0
+        }
+      },
+      "capabilities": {
+        "rotate": true,
+        "translate": false,
+        "scale": false
+      },
+      "actions": [
+        {
+          "id": "recline",
+          "label": "Recline",
+          "transform": { "rotation": { "x": 30 } },
+          "durationMs": 500
+        },
+        {
+          "id": "upright",
+          "label": "Upright",
+          "transform": { "rotation": { "x": 0 } },
+          "durationMs": 500
+        }
+      ]
+    },
+    "legs": {
+      "nodeName": "Legs",
+      "label": "Legs",
+      "type": "static",
+      "capabilities": {
+        "rotate": false,
+        "translate": false,
+        "scale": false
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "armchair_01",
+  "title": "Lounge Armchair",
+  "description": "Ergonomic lounge chair with adjustable armrests and premium upholstery options.",
+  "longDescription": "Designed for the modern living space, this armchair merges structural elegance with everyday comfort. The frame is available in natural or lacquered finishes, and the upholstery comes in four hand-selected fabric tones.",
+  "category": "Seating",
+  "tags": ["living room", "fabric", "ergonomic"],
+  "price": 890,
+  "currency": "USD",
+  "previewImage": "/products/armchair_01/preview.jpg",
+  "dimensions": { "width": 80, "height": 95, "depth": 85, "unit": "cm" },
+  "weight": "22 kg",
+  "materials": ["Beech Wood", "Premium Fabric"],
+  "gallery": [],
+  "modelUrl": null,
+  "contractPath": "/products/armchair_01/contract.json"
+}

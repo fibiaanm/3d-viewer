@@ -1,0 +1,24 @@
+[
+  {
+    "id": "generic_door",
+    "title": "Minimalist Door",
+    "description": "A clean, contemporary door with smooth hinge mechanics and customizable finish.",
+    "category": "Doors",
+    "tags": ["interior", "wood", "minimalist"],
+    "price": 1200,
+    "currency": "USD",
+    "previewImage": "/products/generic_door/preview.jpg",
+    "detailPath": "/products/generic_door/product.json"
+  },
+  {
+    "id": "armchair_01",
+    "title": "Lounge Armchair",
+    "description": "Ergonomic lounge chair with adjustable armrests and premium upholstery options.",
+    "category": "Seating",
+    "tags": ["living room", "fabric", "ergonomic"],
+    "price": 890,
+    "currency": "USD",
+    "previewImage": "/products/armchair_01/preview.jpg",
+    "detailPath": "/products/armchair_01/product.json"
+  }
+]
