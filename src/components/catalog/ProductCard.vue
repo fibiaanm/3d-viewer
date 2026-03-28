@@ -6,7 +6,7 @@
     <div class="aspect-[4/3] bg-[var(--color-surface-2)] relative overflow-hidden">
       <img
         v-if="item.previewImage && !imgError"
-        :src="item.previewImage"
+        :src="previewSrc ?? undefined"
         :alt="item.title"
         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         @error="imgError = true"
@@ -37,12 +37,17 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import AppBadge from '@/components/ui/AppBadge.vue'
 import AppButton from '@/components/ui/AppButton.vue'
 import type { CatalogItem } from '@/types/catalog'
+import { assetUrl } from '@/utils/assetUrl'
 
 const props = defineProps<{ item: CatalogItem }>()
+const router = useRouter()
 const imgError = ref(false)
+
+const previewSrc = computed(() => props.item.previewImage ? assetUrl(props.item.previewImage) : null)
 
 const formattedPrice = computed(() =>
   new Intl.NumberFormat('en-US', {
@@ -53,6 +58,7 @@ const formattedPrice = computed(() =>
 )
 
 function openProduct() {
-  window.open(`/product/${props.item.id}`, '_blank')
+  const { href } = router.resolve({ name: 'product', params: { id: props.item.id } })
+  window.open(href, '_blank')
 }
 </script>
